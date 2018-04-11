@@ -6,7 +6,7 @@ namespace Laser {
         public GameObject center;
         public GameObject circunferencePoint;
 
-        public InputRange tilt = new InputRange(0, 12, 55);
+        public InputRange tilt = new InputRange(0, 12, 55, TypeOfRange.UNSIGNED);
         public InputRange direction = new InputRange(0, -60, 60);
 
         public float _radius;
@@ -25,10 +25,14 @@ namespace Laser {
             if (Input.GetMouseButton(0)) {
                 Vector2 mousePos = Input.mousePosition;
                 direction.Value = _SignedProportion(mousePos.x - _center.x);
-                tilt.Value = _SignedProportion(_center.y - mousePos.y);
+                tilt.Value = -_UnsignedProportion(_center.y - mousePos.y);
             }
 
             transform.rotation = Quaternion.Euler(tilt.Value, direction.Value, 0);
+        }
+
+        private float _UnsignedProportion (float value) {
+            return Mathf.Min(Mathf.Max(-1, value / _radius), 0);
         }
 
         private float _SignedProportion (float value) {
