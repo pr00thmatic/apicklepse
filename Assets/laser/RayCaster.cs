@@ -18,7 +18,7 @@ namespace Laser {
 
             if (Physics.Raycast(transform.position, direction,
                                 out hit, Mathf.Infinity,
-                                LayerMask.GetMask("laser surface"))) {
+                                LayerMask.GetMask("laser surface", "Default"))) {
                 dot.transform.position = hit.point + hit.normal * floatingTreshold;
                 dot.transform.forward = hit.normal;
             }
