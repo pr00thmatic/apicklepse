@@ -16,7 +16,7 @@
    version="1.1"
    id="svg8"
    sodipodi:docname="generic box difuse.svg"
-   inkscape:export-filename="../assets/generic box difuse.png"
+   inkscape:export-filename="../assets/generic box white.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
    inkscape:version="0.92.3 (2405546, 2018-03-11)">
@@ -187,10 +187,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="67.306825"
-     inkscape:cy="118.16484"
+     inkscape:cx="212.30683"
+     inkscape:cy="148.16484"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer3"
      showgrid="false"
      inkscape:window-width="1366"
      inkscape:window-height="715"
@@ -297,5 +297,17 @@
        transform="scale(0.26458333)"
        id="path817-2"
        inkscape:connector-curvature="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="white">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:10.58333302;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill"
+       id="rect1170"
+       width="79.231308"
+       height="79.231308"
+       x="-9.2609015"
+       y="-5.2916665" />
   </g>
 </svg>
