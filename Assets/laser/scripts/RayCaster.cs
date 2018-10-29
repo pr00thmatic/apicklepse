@@ -4,7 +4,7 @@ using System.Collections;
 namespace Laser {
     public class RayCaster : MonoBehaviour {
         public float floatingTreshold = 0.2f;
-        public GameObject dot;
+        public LaserHitPoint dot;
 
         private Control _control;
 
