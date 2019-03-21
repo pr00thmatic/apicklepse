@@ -7,14 +7,20 @@ public class World : MonoBehaviour {
     public delegate void WorldReadyDelegate ();
     public event WorldReadyDelegate OnWorldReady;
 
+    public TextAsset level;
     public GameObject worldPiecePrototype;
-    public int length = 20;
-    public float floorSize = 3;
+    public int length = 70;
+    public int floorSize = 3;
 
     private Transform _tiles;
 
     void Start () {
-        GenerateWithHash(GenerateRandomLevelHash(length, 3));
+        if (level != null) {
+            GenerateWithHash(level.text.Trim().Replace(((char) 13) + "", "") + "\n" +
+                             GenerateRandomLevelHash(length, floorSize));
+        } else {
+            GenerateWithHash(GenerateRandomLevelHash(length, floorSize));
+        }
     }
 
     public void GenerateWithHash (string hash) {
@@ -28,7 +34,6 @@ public class World : MonoBehaviour {
 
         string[] pieces = hash.Split('\n');
         for (int i=0; i < pieces.Length; i++) {
-
             WorldPiece created = Instantiate(worldPiecePrototype).
                 GetComponent<WorldPiece>();
             created.Initialize(pieces[i], _tiles);
@@ -38,7 +43,6 @@ public class World : MonoBehaviour {
         surface.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
         surface.BuildNavMesh();
         if (OnWorldReady != null) {
-            print("world ready! o_O");
             OnWorldReady();
         }
     }
@@ -47,7 +51,7 @@ public class World : MonoBehaviour {
         string hash = "";
 
         for (int i=0; i<length; i++) {
-            hash += Random.Range(0, 2) == 1? "B": " ";
+            hash += Random.Range(0, 2) == 1? "B": "N";
             int holeCount = 0;
             for (int j=0; j<floorWidth; j++) {
                 if (i%2 == 0 && holeCount < floorWidth-1 && Random.Range(0, 2) == 0) {
@@ -57,7 +61,7 @@ public class World : MonoBehaviour {
                     hash += "1";
                 }
             }
-            hash += (Random.Range(0, 2) == 1? "B": " ") + "\n";
+            hash += (Random.Range(0, 2) == 1? "B": "N") + "\n";
         }
 
         return hash.Trim();

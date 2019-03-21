@@ -20,6 +20,7 @@ public class WorldPiece : MonoBehaviour {
         SetWall(hashPiece, 1);
 
         for (int i=0; i < hashPiece.Length - 2; i++) {
+            // char floorChar = hashPiece[i+1] == 'R'? Random.Range(0, 2): hashPiece[i+1];
             SetTile(FLOOR + i, hashPiece[i+1] == '1');
         }
 
@@ -34,6 +35,8 @@ public class WorldPiece : MonoBehaviour {
     }
 
     public void SetWall (string hashPiece, int index) {
+        char wallChar = hashPiece[index == 0? 0: hashPiece.Length-1];
+        wallChar = wallChar == 'R'? (Random.Range(0, 1.0f) < 0.8f? 'N': 'B'): wallChar;
         bool isBonus = hashPiece[index == 0? 0: hashPiece.Length-1] == 'B';
         SetTile(BONUS_WALL + index, isBonus);
         SetTile(WALL + index, !isBonus);

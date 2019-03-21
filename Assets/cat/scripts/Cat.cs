@@ -26,7 +26,8 @@ public class Cat : MonoBehaviour {
                 animator.SetBool("saw laser", false);
                 agent.isStopped = true;
             } else if (!animator.GetBool("saw laser")) {
-                Vector3 dif = _worldController.laser.transform.position - transform.position;
+                Vector3 dif = _worldController.laser.transform.position -
+                    transform.position;
                 if (dif.magnitude < triggerRange &&
                     !Physics.Raycast(transform.position, dif, dif.magnitude)) {
                     animator.SetBool("saw laser", true);
@@ -42,8 +43,9 @@ public class Cat : MonoBehaviour {
 
     public void HandleWorldReady () {
         gameObject.SetActive(true);
+        float normalSpeed = agent.speed;
         GameController.instance.races.RollTheDiceOfDestiny(this);
-        animator.SetFloat("anim speed", agent.speed / 7.0f);
+        animator.SetFloat("anim speed", agent.speed / normalSpeed);
     }
 
     public void SetMaterial (Material material) {

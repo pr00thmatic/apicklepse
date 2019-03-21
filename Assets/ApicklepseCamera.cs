@@ -11,5 +11,7 @@ public class ApicklepseCamera : MonoBehaviour {
     void Update () {
         _speed += acceleration * Time.deltaTime;
         transform.position += new Vector3(0, 0, 1) * _speed * Time.deltaTime;
+
+        _speed = Mathf.Min(maxSpeed, _speed);
     }
 }
