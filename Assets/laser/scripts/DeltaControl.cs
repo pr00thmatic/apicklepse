@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Laser {
-    public class SimplerControl : MonoBehaviour {
+    public class DeltaControl : MonoBehaviour {
         public Transform controlPoints;
         public Vector2 input;
         public bool lockPosition = false;
+        public float speed;
 
         private Transform _rig;
         private Transform _xRot;
@@ -18,11 +19,6 @@ namespace Laser {
         private Transform _topLeft;
         private Transform _bottomRight;
         private Transform _bottomLeft;
-
-        private float _width;
-        private float _height;
-        private Vector2 _top; // screen point
-        private Vector2 _bottom; // screen point
 
         void Start () {
             _rig = transform.Find("rig");
@@ -36,22 +32,14 @@ namespace Laser {
             _bottomRight = controlPoints.Find("bottom right");
             _bottomLeft = controlPoints.Find("bottom left");
 
-            _top = new Vector2(Camera.main.WorldToScreenPoint(_topLeft.position).x,
-                               Camera.main.WorldToScreenPoint(_up.position).y);
-            _bottom = new Vector2(Camera.main.WorldToScreenPoint(_topRight.position).x,
-                                  Camera.main.WorldToScreenPoint(_down.position).y);
-
-            _width = Mathf.Abs(_top.x - _bottom.x);
-            _height = Mathf.Abs(_top.y - _bottom.y);
             input = new Vector2(0.5f, 0.5f);
         }
 
         void Update () {
-            if (Input.GetMouseButton(0)) {
-                float xProportion = (_bottom.x - Input.mousePosition.x) / _width;
-                float yProportion = (Input.mousePosition.y - _bottom.y) / _height;
-                input = new Vector2(Mathf.Lerp(1, 0, xProportion),
-                                    Mathf.Lerp(1, 0, yProportion));
+            if (Util.GetLaserInput()) {
+                float relativeSpeed = (0.2f + 0.8f * (1 - input.y)) * speed;
+                input += Util.GetInputVelocity() * relativeSpeed;
+                input = new Vector2(Mathf.Max(0, Mathf.Min(1, input.x)),                                    Mathf.Max(0, Mathf.Min(1, input.y)));
             }
 
             if (!lockPosition) {
@@ -70,5 +58,6 @@ namespace Laser {
             _yRot.localRotation =
                 Quaternion.Lerp(leftRot, rightRot, input.x);
         }
+
     }
 }

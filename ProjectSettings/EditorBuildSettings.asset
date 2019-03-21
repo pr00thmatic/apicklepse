@@ -4,4 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/laser/scenes/test.unity
+    guid: 2a4d7480dadf4334bb228f4da0159e43
+  m_configObjects: {}
