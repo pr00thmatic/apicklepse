@@ -25,7 +25,7 @@ namespace Laser {
             if (Input.GetMouseButton(0)) {
                 Vector2 mousePos = Input.mousePosition;
                 direction.Value = _SignedProportion(mousePos.x - _center.x);
-                tilt.Value = -_UnsignedProportion(_center.y - mousePos.y);
+                tilt.Value = 1+_UnsignedProportion(_center.y - mousePos.y);
             }
 
             transform.rotation = Quaternion.Euler(tilt.Value, direction.Value, 0);
